@@ -17,8 +17,6 @@ _You will need to create a file called "migrationData.csv" where you can enter t
 
 * [Python 3.9](http://www.dropwizard.io/1.0.2/docs/) - Programming language in which the tool is written.
 
-* [IMAPLib](https://maven.apache.org/) - Library used to carry out communications with email servers.
-
 ## Versions 📌
 
 * **V. 1 _(08/01/2021)_ --->** The tool generates a folder with a timestamp by name and creates the subdirectories of each email account one by one, filling them with the downloaded emails, and then uploading them to the new server.
