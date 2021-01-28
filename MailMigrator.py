@@ -1,6 +1,7 @@
 # This script is limited to downloading from one server and uploading to another all the emails from the email accounts provided in the "migrationData.csv" file.
 import csv
 import imaplib
+from os import path
 import os
 import re
 from printFormatter import colors
@@ -20,7 +21,7 @@ def openConnection(Server, serverPort, Account, Passwd): # It generates a connec
         exit()
     return Connection
 
-def listMailboxes(Server, serverPort, Account, Passwd, Row): # List all the mailboxes in an email account.s
+def listMailboxes(Server, serverPort, Account, Passwd, Row): # List all the mailboxes in an email account.
     
     def parseMailboxes(Mailbox): # Extract the mailbox names from the raw output of the mailbox listing.
         listResponsePattern = re.compile(r'\((?P<flags>.*?)\) "(?P<delimiter>.*)" (?P<name>.*)')
@@ -60,11 +61,10 @@ def downloadMails(Connection, Mailboxes, Row, userRootFolder, Name): # Goes thro
                 print(f"{colors.fg.green}[+] Saving message {fileName}{colors.reset}")
                 with open(fileName, "wb") as File:
                     File.write(Data[0][1])
-            Connection.close()
         else:
-            print(f"{colors.bold}{colors.fg.red}!] Error opening mailbox {Mailbox}")
-            Connection.close()
-
+            print(f"{colors.bold}{colors.fg.red}[!] Error opening mailbox {Mailbox}{colors.reset}")
+            
+    Connection.close()
     Connection.logout()
     Connection = openConnection(Row[4], Row[5], Row[6], Row[7])
     uploadMails(Connection, Mailboxes, userRootFolder)
