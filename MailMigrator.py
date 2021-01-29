@@ -1,8 +1,8 @@
 # This script is limited to downloading from one server and uploading to another all the emails from the email accounts provided in the "migrationData.csv" file.
 import csv
 import imaplib
-from os import path
 import os
+from os import path
 import re
 from printFormatter import colors
 from datetime import datetime
@@ -13,7 +13,11 @@ os.system(f"mkdir ./{dateTime}/")
 rootFolder = f"./{dateTime}/"
 
 def openConnection(Server, serverPort, Account, Passwd): # It generates a connection with a mail server and authenticates with it using a given email and password.
-    Connection = imaplib.IMAP4(host=Server, port=serverPort)
+    if serverPort == 993:
+        Connection = imaplib.IMAP4_SSL(host=Server, port=serverPort)
+    else:
+        Connection = imaplib.IMAP4(host=Server, port=serverPort)
+
     try:
         Connection.login(user=Account, password=Passwd)
     except Exception as Error:
@@ -100,7 +104,7 @@ def uploadMails(Connection, Mailboxes, userRootFolder): # Create the old mailbox
 
 if __name__ == "__main__":
     os.system("clear")
-    with open("migratioNData.csv") as migrationData:
+    with open("migrationData.csv") as migrationData:
         csvReader = csv.reader(migrationData, delimiter=",")
         lineCount = 0
 
