@@ -1,4 +1,4 @@
-# Email Migrator
+# eMigrator
 
 _Tool designed to massively migrate email accounts between multiple email servers._
 
@@ -15,7 +15,7 @@ _You will need to create a file called "migrationData.csv" where you can enter t
 
 ## Built With 🛠️
 
-* [Python 3.9](http://www.dropwizard.io/1.0.2/docs/) - Programming language in which the tool is written.
+* [Python 3.9](https://www.python.org/) - Programming language in which the tool is written.
 
 ## Versions 📌
 
